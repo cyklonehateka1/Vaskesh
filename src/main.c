@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <fcntl.h>
 
 #include "../include/jobs.h"
 #include "../include/parser.h"
@@ -15,7 +16,6 @@
 int main(void) {
     char input[INPUT_SIZE];
 
-    // Set up signal handler for background jobs
     signal(SIGCHLD, handle_sigchld);
 
     while (1) {
@@ -27,23 +27,26 @@ int main(void) {
             break;
         }
 
-        // Remove newline
         input[strcspn(input, "\n")] = '\0';
 
-        // Exit
         if (strcmp(input, "exit") == 0) {
             printf("Goodbye 👋\n");
             break;
         }
 
-        // Parse command
         char *args[64];
-        bool background = false;
-        parse_input(input, args, &background);
+        bool output_redirection;
+        bool append_mode;
+        bool input_redirection;
+        char *output_file = NULL;
+        char *input_file = NULL;    
+
+        bool background;
+        parse_input(input, args, &background, &output_redirection, &input_redirection, &append_mode, &output_file, &input_file);
 
         if (args[0] == NULL) continue;
 
-        execute_command(args, background);
+        execute_command(args, background, &output_redirection, &input_redirection, &append_mode, output_file, input_file);
     }
 
     return 0;

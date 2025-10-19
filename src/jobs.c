@@ -23,7 +23,6 @@ void handle_sigchld(int sig) {
     pid_t pid;
     int status;
 
-    // Clean up finished background processes
     while ((pid = waitpid(-1, &status, WNOHANG)) > 0) {
         for (int i = 0; i < job_count; i++) {
             if (job_list[i].pid == pid) {
