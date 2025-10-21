@@ -44,7 +44,6 @@ int main(void) {
 
         char *converted_command = query_ollama(line);
 
-        printf("AI -> %s\n", converted_command);
         if (!converted_command) {
             fprintf(stderr, "AI conversion failed. Try again.\n");
             free(line);
