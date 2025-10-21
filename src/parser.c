@@ -68,3 +68,4 @@ bool parse_input(char *input, ParsedInput *parsed) {
 
     return parsed->num_commands > 0;
 }
+
