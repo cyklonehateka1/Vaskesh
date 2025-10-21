@@ -93,7 +93,7 @@ char* query_ollama(const char *prompt) {
 
     char *command = extract_response_text(s.ptr);
     trim_command(command);
-    // printf("AI -> %s\n", command ? command : "(null)");
+    printf("AI -> %s\n", command ? command : "(null)");
 
     free(s.ptr);
     return command;
