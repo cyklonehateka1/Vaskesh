@@ -50,12 +50,10 @@ Before building, ensure the following dependencies are installed:
 sudo apt install build-essential libreadline-dev libcurl4-openssl-dev
 For macOS (using Homebrew):
 bash
-Copy code
 brew install readline curl
 You’ll also need Ollama installed and running:
 
 bash
-Copy code
 brew install --cask ollama
 ollama run llama3
 🏗️ Build Instructions
